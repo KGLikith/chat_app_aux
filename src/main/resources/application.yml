@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: server
+
+  datasource:
+    url: ${DB_URI:jdbc:postgresql://localhost:5432/chatdb}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+grpc:
+  server:
+    port: ${GRPC_PORT:9090}
