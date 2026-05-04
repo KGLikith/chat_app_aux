@@ -1,4 +1,9 @@
-FROM ubuntu:latest
-LABEL authors="Likith K G"
+FROM eclipse-temurin:21-jre
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+
+COPY build/libs/*.jar app.jar
+
+EXPOSE 9090
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -9,6 +9,10 @@ plugins {
 	id("com.google.protobuf") version "0.9.4"
 }
 
+springBoot {
+	mainClass.set("com.chat.server.ServerApplicationKt")
+}
+
 group = "com.chat"
 version = "0.0.1-SNAPSHOT"
 
@@ -85,4 +89,17 @@ protobuf {
 			}
 		}
 	}
+}
+
+tasks.register("printCp") {
+	doLast {
+		println(sourceSets["main"].runtimeClasspath.asPath)
+	}
+}
+
+tasks.register<JavaExec>("runClient") {
+	group = "application"
+	mainClass.set("com.chat.server.client.ChatClientKt")
+	classpath = sourceSets["main"].runtimeClasspath
+	standardInput = System.`in`
 }

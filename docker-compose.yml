@@ -1,21 +1,29 @@
-version: "3.9"
+version: "3.8"
 
 services:
   db:
     image: postgres:latest
     container_name: chatapp-db
-    restart: always
-
     environment:
       POSTGRES_DB: chatdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-
     ports:
       - "5432:5432"
-
     volumes:
       - chatapp_pg_data:/var/lib/postgresql/data
+
+  server:
+    build: .
+    container_name: chatapp-server
+    depends_on:
+      - db
+    ports:
+      - "9090:9090"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/chatdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
 
 volumes:
   chatapp_pg_data:
