@@ -14,7 +14,7 @@ class MessageService(
 ) {
     fun sendMessage(request: SendMessageRequest): ChatMessage {
         val entity = MessageEntity(
-            conversationId = UUID.fromString(request.conversationId),
+            conversationId = request.conversationId,
             senderId = UUID.fromString(request.senderId),
             content = request.content
         )
@@ -35,12 +35,12 @@ class MessageService(
         return message
     }
 
-    fun getMessages(conversationId: Long): List<ChatMessage> {
+    fun getMessages(conversationId: String): List<ChatMessage> {
         return messageRepository.findByConversationId(conversationId)
             .map {
                 ChatMessage.newBuilder()
                     .setId(it.id!!.toString())
-                    .setConversationId(it.conversationId.toString())
+                    .setConversationId(it.conversationId)
                     .setSenderId(it.senderId.toString())
                     .setContent(it.content)
                     .build()

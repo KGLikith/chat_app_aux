@@ -8,9 +8,9 @@ import java.util.concurrent.ConcurrentHashMap
 
 @Component
 class MessageBroadcaster {
-    private val conversationFlows = ConcurrentHashMap<UUID, MutableSharedFlow<ChatMessage>>()
+    private val conversationFlows = ConcurrentHashMap<String, MutableSharedFlow<ChatMessage>>()
 
-    fun getFlow(conversationId: UUID): MutableSharedFlow<ChatMessage> {
+    fun getFlow(conversationId: String): MutableSharedFlow<ChatMessage> {
         return conversationFlows.computeIfAbsent(conversationId) {
             MutableSharedFlow(
                 replay = 0,

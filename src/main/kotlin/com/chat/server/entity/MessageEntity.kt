@@ -16,7 +16,7 @@ data class MessageEntity(
     @UuidGenerator
     val id: UUID? = null,
 
-    val conversationId: UUID,
+    val conversationId: String,
 
     val senderId: UUID,
 

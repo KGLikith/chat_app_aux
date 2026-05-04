@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.UUID
 
 interface MessageRepository : JpaRepository<MessageEntity, UUID>{
-    fun findByConversationId(conversationId: Long): List<MessageEntity>
+    fun findByConversationId(conversationId: String): List<MessageEntity>
+    fun findByConversationIdOrderByTimestampAsc(conversationId: String): List<MessageEntity>
 }
