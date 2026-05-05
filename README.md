@@ -6,7 +6,7 @@ This is a real-time chat application built using gRPC for communication, Kotlin 
 
 1. **Build the project**
    ```bash
-   ./gradlew clean build
+   ./gradlew build -x test
    ```
 
 2. Start server and database  
